@@ -1,0 +1,31 @@
+.mainScreen
+  position absolute
+  width 100%
+  height 100%
+  .preview
+    position absolute
+    display block
+    top 0
+    left 0
+    width 55%
+    border 1px solid green
+  .preview:before
+    content ""
+    display block
+    margin-top 56.25%
+  .active
+    position absolute
+    top 0
+    left 0
+    width 100%
+    border 1px solid yellow
+  .active:before
+    content ""
+    display block
+    margin-top 56.25%
+  .activeWithPreview
+    width 55%
+    top auto
+    left auto
+    bottom 0
+    right 0

@@ -1,0 +1,8 @@
+<div class="mainScreen">
+    <div class="active" ng-if="activeStream.stream.channel" ng-class="{'activeWithPreview': previewStream.stream.channel !== ''}">
+        Active {{activeStream.stream.channel}}
+    </div>
+    <div class="preview" ng-if="previewStream.stream.channel" ng-style="previewStreamStyle">
+        Preview: {{previewStream.stream.channel}}
+    </div>
+</div>

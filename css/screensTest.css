@@ -1,0 +1,34 @@
+.mainScreen {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 1px solid #f00;
+  background: #000;
+  overflow: hidden;
+}
+.mainScreen .video {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.mainScreen .video1 {
+  background: #add8e6;
+}
+.mainScreen .video2 {
+  background: #f08080;
+}
+.mainScreen .preview {
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 0;
+  border: 5px solid #008000;
+  resize: both;
+}
+.mainScreen .active {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  border: 5px solid #ff0;
+  resize: both;
+}

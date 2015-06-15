@@ -1,0 +1,14 @@
+<div class='picker' ng-show='show'>
+    <div class='picker-overlay' ng-click='hidePicker()'></div>
+    <div class='picker-dialog'>
+        <span class="picker-back glyphicon glyphicon-menu-left" ng-click='back()' ng-if="backStateAvailable"></span>
+        <span class="picker-close glyphicon glyphicon-remove" ng-click='hidePicker()'></span>
+        <div class='picker-content'>
+            <div class="card" ng-repeat="card in content" ng-click="cardClicked(card)">
+                <div class="title">{{card.title}}</div>
+                <div class="description">{{card.description}}</div>
+                <img class="image" ng-src="{{card.img}}"/>
+            </div>
+        </div>
+    </div>
+</div>
