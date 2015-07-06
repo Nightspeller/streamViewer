@@ -1,23 +1,20 @@
 <div class="streamOverview">
     <div class="streamOverviewContent">
         <div class="streamOverviewControls">
-            <button type="button" class="btn btn-default glyphicon glyphicon-plus" title="Add stream" ng-click="add()">
-            </button>
-            <button type="button" class="btn btn-default glyphicon glyphicon-refresh" title="Refresh" ng-click="refresh()">
-            </button>
-            <button type="button" class="btn btn-default glyphicon glyphicon-trash" title="Remove stream" ng-click="remove()">
-            </button>
-            <button type="button" class="btn btn-default glyphicon glyphicon-eye-open" title="Preview" ng-class="{'pressedButton': previewSelected.stream.id === num}"
-                    ng-click="preview()" >
-                <!--ng-mouseover="preview()" ng-mouseleave="preview()"-->
-            </button>
-            <button type="button" class="btn btn-default glyphicon glyphicon-share-alt" title="Move to big screen" ng-class="{'pressedButton': activeSelected.stream.id === num}" ng-click="moveToMain()">
-            </button>
+            <button title="Add stream" data-ng-click="add()">Add</button>
+            <button title="Refresh" data-ng-click="refresh()">Ref</button>
+            <button title="Remove stream" data-ng-click="remove()">Del</button>
+            <button title="Preview" data-ng-class="{'pressedButton': StreamsStateManager.streams[num].status === 'preview'}"
+                    data-ng-click="preview($event)">Prev</button>
+            <!--data-ng-mouseover="preview($event)" data-ng-mouseleave="preview($event)"-->
+            <button type="button" title="Move to big screen" data-ng-class="{'pressedButton': StreamsStateManager.streams[num].status === 'active'}" data-ng-click="moveToMain()">Main</button>
         </div>
-        <div class="streamOverviewVideo">
-            <br><br><br>
-            {{stream.channel}}
-
+        <div class="streamOverviewVideo"></div>
+        <div class="additionalInfo" data-ng-show="StreamsStateManager.streams[num].info !== ''">
+            <div class="name">{{StreamsStateManager.streams[num].info.display_name}}:</div>
+            <!--<div>{{StreamsStateManager.streams[num].info.status}}</div>-->
+            <div>{{StreamsStateManager.streams[num].info.game}}</div>
+            <div>{{StreamsStateManager.streams[num].info.viewers}} viewers</div>
         </div>
     </div>
 </div>

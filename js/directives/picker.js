@@ -1,31 +1,33 @@
 (function () {
-    app.directive('picker', ['PickerService', function(PickerService) {
+    angular.module(appConfig.appName).directive('picker', ['PickerService', function (PickerService) {
         return {
             restrict: 'E',
             replace: true,
             templateUrl: 'templates/picker.html',
-            controller: function($scope) {
+            controller: function ($scope) {
+
+                $scope.PickerService = PickerService;
+
                 $scope.hidePicker = function () {
                     PickerService.resetState();
                 };
+
                 $scope.cardClicked = function (card) {
                     PickerService.setCurrentState(card.nextState);
                 };
+
                 $scope.back = function () {
                     PickerService.returnToPrevState();
                 };
 
-                $scope.$watch(PickerService.getContent, function (newValue, oldValue) {
-                    $scope.content = newValue;
-                });
+                $scope.prevPage = function () {
+                    PickerService.prevPage();
+                };
 
-                $scope.$watch(PickerService.isBackStateAvailable, function () {
-                    $scope.backStateAvailable = PickerService.isBackStateAvailable();
-                });
+                $scope.nextPage = function () {
+                    PickerService.nextPage();
+                };
 
-                $scope.$watch(PickerService.isShowPicker, function (newValue) {
-                    $scope.show = newValue;
-                });
             }
         };
     }]);

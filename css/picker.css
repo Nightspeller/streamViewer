@@ -12,19 +12,20 @@
 /* A centered div above the overlay with a box shadow. */
   z-index: 10000;
   position: absolute;
-  width: 80%;
-  border: 1px solid #c0c0c0;
+  width: 100%;
+  border-top: 1px solid #c0c0c0;
+  border-bottom: 1px solid #c0c0c0;
 /* Center the dialog */
-  top: 20%;
-  left: 20%;
-  transform: translate(-13%, -10%);
+  top: 10%;
+  bottom: 10%;
+  left: 0;
+  overflow-y: scroll;
 }
 .picker-dialog .picker-close,
 .picker-dialog .picker-back {
   position: absolute;
-  padding: 5px;
   cursor: pointer;
-  font-size: 200%;
+  border: none;
 }
 .picker-dialog .picker-back {
   top: 3px;
@@ -35,15 +36,25 @@
   right: 5px;
 }
 .picker-dialog .picker-content {
-  padding: 10px;
   text-align: center;
+}
+.picker-dialog .picker-content .picker-pagination {
+  width: 100%;
+  text-align: center;
+}
+.picker-dialog .picker-content .picker-pagination button {
+  cursor: pointer;
+  border: none;
 }
 .picker-dialog .picker-content .card {
   display: inline-block;
-  max-width: 30%;
-  padding: 2em;
+  width: 20%;
+  padding: 1em;
+}
+.picker-dialog .picker-content .card .description {
+  color: #ff0;
 }
 .picker-dialog .picker-content .card img {
-  width: 100%;
-  max-height: 230px;
+  max-width: 100%;
+  max-height: 80%;
 }

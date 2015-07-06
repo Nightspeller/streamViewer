@@ -1,13 +1,20 @@
-<div class='picker' ng-show='show'>
-    <div class='picker-overlay' ng-click='hidePicker()'></div>
+<div class='picker' data-ng-show='PickerService.showPicker'>
+    <div class='picker-overlay' data-ng-click='hidePicker()'></div>
     <div class='picker-dialog'>
-        <span class="picker-back glyphicon glyphicon-menu-left" ng-click='back()' ng-if="backStateAvailable"></span>
-        <span class="picker-close glyphicon glyphicon-remove" ng-click='hidePicker()'></span>
+        <button class="picker-back" data-ng-click='back()' data-ng-show="PickerService.statesStack[PickerService.statesStack.length - 1] !== 'sources'">&#xe112;</button>
+        
+
+        
+        <button class="picker-close" data-ng-click='hidePicker()'>&#xe10a;</button>
         <div class='picker-content'>
-            <div class="card" ng-repeat="card in content" ng-click="cardClicked(card)">
-                <div class="title">{{card.title}}</div>
+            <div class="picker-pagination">
+                <button data-ng-click='prevPage()'>&#xe100; PREV</button>
+                <button data-ng-click='nextPage()'>NEXT &#xe101;</button>
+            </div>
+            <div class="card" data-ng-repeat="card in PickerService.content" data-ng-click="cardClicked(card)">
+                <div class="title">{{card.title | limitTo: 50}}</div>
                 <div class="description">{{card.description}}</div>
-                <img class="image" ng-src="{{card.img}}"/>
+                <img class="image" data-ng-src="{{card.img}}"/>
             </div>
         </div>
     </div>

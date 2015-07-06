@@ -1,26 +1,41 @@
 (function () {
-    app.controller('appController', ['$scope', 'ChatService', function($scope, ChatService) {
-        Twitch.init({clientId: 'aoj81mhxdidmwxqw05lm73wt7s2p3sg'}, function(error, status) {
-            if (error) {
-                console.log(error);
+    angular.module(appConfig.appName).controller('AppController', ['$scope', '$timeout', 'StreamsStateManager', function ($scope, $timeout, StreamsStateManager) {
+        $scope.keyPressed = function ($event) {
+            if ($event.keyCode === 96) {
+                StreamsStateManager.showStreamOverviewList = !StreamsStateManager.showStreamOverviewList;
             }
+                
+            if ($event.keyCode === 92) {
+                StreamsStateManager.showChat = !StreamsStateManager.showChat;
+            }
+        };
 
-            $scope.loginButtonClicked = function () {
-                Twitch.login({
-                    scope: ['user_read', 'channel_read', 'chat_login']
-                });
-            };
+        $scope.StreamsStateManager = StreamsStateManager;
+        //$scope.showWebView = false;
+        //$scope.token = 'asdf';
 
-           /* if (status.authenticated) {
-                ChatService.currentConnection.auth = 'oauth:'+status.token;
-                console.log('authenticated!')
-            }*/
+        //var msWebview = document.getElementsByTagName('x-ms-webview')[0];
+        //var webviewSrc = msWebview.src;
 
-            Twitch.api({method: 'oauth2/token'}, function(error, data) {
-                console.log(data);
-            });
+        //$timeout(function () {
+        //    console.log('asdf', webviewSrc)
+        //    if (webviewSrc.indexOf('access_token') === -1) {
+        //        $scope.showWebView = true;
+        //        $scope.token = msWebview.src;
+        //        msWebview.addEventListener("mswebviewnavigationcompleted", function () {
+        //            if (webviewSrc.indexOf('access_token') !== -1) {
+        //                $scope.token = msWebview.src;
+        //                $scope.showWebView = false;
+        //            }
+        //        });
+        //    }
+        //}, 5000);
 
-            console.log(error, status);
-        });
+        //$scope.loginButtonClicked = function () {
+        //    $scope.token = msWebview.src;
+        //};
+
+
+
     }]);
 })();

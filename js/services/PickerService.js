@@ -1,129 +1,105 @@
 (function () {
-    app.service('PickerService', ['$http', 'StreamsStateManager', function ($http, StreamsStateManager) {
-        var statesStack = ['sources'];
-        var pickingFor = null;
-        var showPicker = false;
-        var content = [
-            {
-                title: 'Twitch.tv',
-                description: 'Largest gaming service',
-                img: 'img/logo_twitch.jpg',
-                nextState: 'twitchGames'
-            },{
-                title: 'Cybergame.tv',
-                description: 'Russian gaming service',
-                img: 'img/logo_cybergame.jpg',
-                nextState: {state: 'pickingDone'}
-            },{
-                title: 'Goodgame.tv',
-                description: 'Goodgame sucks',
-                img: 'img/logo_goodgame.png',
-                nextState: {state: 'pickingDone'}
-            }
-        ];
+    angular.module(appConfig.appName).service('PickerService', ['StreamsStateManager', 'TwitchAPIService', function (StreamsStateManager, TwitchAPIService) {
 
-        this.isShowPicker = function () {
-            return showPicker;
-        };
-
-        this.getCurrentState = function () {
-            return statesStack[statesStack.length-1];
-        };
-
-        this.isBackStateAvailable = function () {
-            return statesStack[statesStack.length-1] !== 'sources';
-        };
+        this.statesStack = ['sources'];
+        this.pickingFor = null;
+        this.showPicker = false;
+        this.page = 0;
+        this.content = [];
 
         this.setCurrentState = function (state) {
-            statesStack.push(state);
-            this.updateContent();
+            this.statesStack.push(state);
+            this.page = 0;
+            this.generateContentForState(state);
         };
 
         this.returnToPrevState = function () {
-            statesStack.pop();
-            this.updateContent();
+            this.statesStack.pop();
+            this.page = 0;
+            this.generateContentForState(this.statesStack[this.statesStack.length - 1]);
         };
 
         this.resetState = function () {
-            statesStack = ['sources'];
-            this.updateContent();
-            pickingFor = null;
-            showPicker = false;
+            this.statesStack = ['sources'];
+            this.generateContentForState('sources');
+            this.pickingFor = null;
+            this.showPicker = false;
+            this.page = 0;
         };
 
         this.pickStreamFor = function (id) {
-            pickingFor = id;
-            showPicker = true;
+            this.resetState();
+            this.pickingFor = id;
+            this.showPicker = true;
         };
 
-        this.getContent = function () {
-            return content;
+        this.prevPage = function () {
+            if (this.page !== 0) {
+                this.page--;
+                this.generateContentForState(this.statesStack[this.statesStack.length - 1]);
+            }
+        };
+        this.nextPage = function () {
+            this.page++;
+            this.generateContentForState(this.statesStack[this.statesStack.length - 1]);
         };
 
-        this.updateContent = function(){
-            var currentState = statesStack[statesStack.length-1];
-            if (currentState === 'sources') {
-                content = [
+        this.generateContentForState = function (state) {
+            var self = this;
+            if (state === 'sources') {
+                self.content = [
                     {
                         title: 'Twitch.tv',
                         description: 'Largest gaming service',
-                        img: 'img/logo_twitch.jpg',
+                        img: 'images/logo_twitch.jpg',
                         nextState: 'twitchGames'
                     },{
                         title: 'Cybergame.tv',
                         description: 'Russian gaming service',
-                        img: 'img/logo_cybergame.jpg',
+                        img: 'images/logo_cybergame.jpg',
                         nextState: {state: 'pickingDone'}
                     },{
                         title: 'Goodgame.tv',
                         description: 'Goodgame sucks',
-                        img: 'img/logo_goodgame.png',
+                        img: 'images/logo_goodgame.png',
                         nextState: {state: 'pickingDone'}
                     }
                 ];
             }
-            if (currentState === 'twitchGames') {
-                content = [];
-                var url = "https://api.twitch.tv/kraken/games/top?limit=15&offset="+0*15+"&callback=JSON_CALLBACK";
-                $http.defaults.headers.common["X-Custom-Header"] = "Angular.js";
-                $http.jsonp(url).success(function(data) {
+
+            if (state === 'twitchGames') {
+                TwitchAPIService.getGames(12, this.page).then(function (data) {
                     var tempContent = [];
                     for (var i = 0; i < data.top.length; i++) {
                         var game = {};
                         game.title = data.top[i].game.name;
-                        game.description = data.top[i].viewers+' viewers';
+                        game.description = data.top[i].viewers + ' viewers';
                         game.img = data.top[i].game.box.medium;
-                        game.nextState = {state: 'twitchGame', game: data.top[i].game.name};
+                        game.nextState = { state: 'twitchGame', game: data.top[i].game.name };
                         tempContent.push(game);
                     }
-                    content = tempContent;
-                })
-                .error(function(data) {
-                    console.error(data);
+                    self.content = tempContent;
                 });
             }
-            if (currentState.state === 'twitchGame') {
-                content = [];
-                var url = "https://api.twitch.tv/kraken/streams?game=" + currentState.game + "&limit=12&offset=" + 12*0+"&callback=JSON_CALLBACK";
-                $http.defaults.headers.common["X-Custom-Header"] = "Angular.js";
-                $http.jsonp(url).success(function(data) {
+
+            if (state.state === 'twitchGame') {
+                TwitchAPIService.getStreamsForGame(12, this.page, state.game).then(function (data) {
                     var tempContent = [];
                     for (var i = 0; i < data.streams.length; i++) {
                         var stream = {};
                         stream.title = data.streams[i].channel.status;
-                        stream.description = data.streams[i].channel.name +' ' + data.streams[i].viewers;
+                        stream.description = data.streams[i].channel.name + ': ' + data.streams[i].viewers + ' viewers';
                         stream.img = data.streams[i].preview.medium;
-                        stream.nextState = {state: 'pickingDone', channel: data.streams[i].channel.name};
+                        data.streams[i].channel.viewers = data.streams[i].viewers;
+                        stream.nextState = { state: 'pickingDone', channel: data.streams[i].channel };
                         tempContent.push(stream);
                     }
-                    content = tempContent;
-                })
-                .error(function(data) {
-                    console.error(data);
+                    self.content = tempContent;
                 });
             }
-            if (currentState.state === 'pickingDone') {
-                StreamsStateManager.streams[pickingFor].channel = currentState.channel;
+
+            if (state.state === 'pickingDone') {
+                StreamsStateManager.updateStream(this.pickingFor, state.channel.name, state.channel);
                 this.resetState();
             }
         }

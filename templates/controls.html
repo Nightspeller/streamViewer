@@ -1,0 +1,13 @@
+<div class="controls">
+    <button title="Show Controls" data-ng-click="showControls()">
+        <span data-ng-show="!showAllControls">Show</span>
+        <span data-ng-show="showAllControls">Hide</span>
+    </button>
+    <div data-ng-show="showAllControls">
+        <button title="Show/Hide Stream List" data-ng-click="toggleStreamList()">List</button>
+        <button title="Show/Hide Chat" data-ng-click="toggleChat()">Chat</button>
+        <button title="Swap main and preview" data-ng-click="swapMainAndPreview()">Swap</button>
+        <button title="Show all 4 streams" data-ng-click="showAllStreams()">All</button>
+        <button title="About StreamViewer" data-ng-click="showAbout()">?</button>
+    </div>
+</div>

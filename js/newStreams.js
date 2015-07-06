@@ -1,3 +1,1 @@
-var app = angular.module('streamViewer', ['ngWebSocket']);
-
-
+var app = angular.module('streamViewer', []);
