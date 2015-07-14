@@ -9,28 +9,39 @@
                 $scope.previewStream = '';
             },
             link: function (scope, elem, attrs) {
+                var activeContainer = elem[0].getElementsByClassName('active')[0];
+                var previewContainer = elem[0].getElementsByClassName('preview')[0];
                 scope.$watch(function () { return JSON.stringify(StreamsStateManager.streams) }, function (newValue, oldValue) {
                     if (newValue !== oldValue) {
-                        scope.activeStream = '';
-                        scope.previewStream = '';
+
+                        var newActive = '';
+                        var newPreview = '';
                         for (var i = 0; i < 4; i++) {
                             if (StreamsStateManager.streams[i].status === 'active') {
-                                var videoContainer = elem[0].getElementsByClassName('active')[0];
-                                if (videoContainer.firstChild) videoContainer.removeChild(videoContainer.firstChild);
-                                videoContainer.appendChild(StreamsStateManager.streams[i].player);
-                                if (typeof WinJS !== 'undefined') StreamsStateManager.streams[i].player.play();
-                                scope.activeStream = i;
-                                adjustStreams();
+                                newActive = i;
                             }
                             if (StreamsStateManager.streams[i].status === 'preview') {
-                                var videoContainer = elem[0].getElementsByClassName('preview')[0];
-                                if (videoContainer.firstChild) videoContainer.removeChild(videoContainer.firstChild);
-                                videoContainer.appendChild(StreamsStateManager.streams[i].player);
-                                if (typeof WinJS !== 'undefined') StreamsStateManager.streams[i].player.play();
-                                scope.previewStream = i;
-                                adjustStreams();
+                                newPreview = i;
                             }
                         }
+
+                        for (var i = 0; i < 4; i++) {
+                            if (StreamsStateManager.streams[i].status === 'active' && activeContainer.innerHTML !== StreamsStateManager.streams[newActive].player.outerHTML) {
+                                if (activeContainer.firstChild) activeContainer.removeChild(activeContainer.firstChild);
+                                activeContainer.appendChild(StreamsStateManager.streams[i].player);
+                                if (typeof WinJS !== 'undefined') StreamsStateManager.streams[i].player.play();
+                                scope.activeStream = i;
+                            }
+                            if (StreamsStateManager.streams[i].status === 'preview' && previewContainer.innerHTML !== StreamsStateManager.streams[newPreview].player.outerHTML) {
+                                if (previewContainer.firstChild) previewContainer.removeChild(previewContainer.firstChild);
+                                previewContainer.appendChild(StreamsStateManager.streams[i].player);
+                                if (typeof WinJS !== 'undefined') StreamsStateManager.streams[i].player.play();
+                                scope.previewStream = i;
+                            }
+                        }
+                        $timeout(function () {
+                            adjustStreams();
+                        },50);
                     }
                 });
 
@@ -53,7 +64,7 @@
                     var previewStreamElem = elem[0].getElementsByClassName('preview')[0];
                     var ratio = 16 / 9;
 
-                    if (scope.activeStream !== '' && scope.previewStream !== '') {
+                    if (activeStreamElem.innerHTML !== '' && previewStreamElem.innerHTML !== '') {
                         var screenWidth = elem[0].offsetWidth;
                         var screenHeight = elem[0].offsetHeight;
                         var videoWidth = 0;
