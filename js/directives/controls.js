@@ -16,6 +16,17 @@
                     StreamsStateManager.showStreamOverviewList = !StreamsStateManager.showStreamOverviewList;
                 }
 
+                var isFullscreen = false;
+                $scope.toggleFullscreenMode = function () {
+                    if (isFullscreen) {
+                        exitFullscreen();
+                        isFullscreen = false;
+                    } else {
+                        enterFullscreen(document.documentElement);
+                        isFullscreen = true;
+                    }
+                }
+
                 $scope.toggleChat = function () {
                     StreamsStateManager.showChat = !StreamsStateManager.showChat;
                 }
@@ -32,6 +43,28 @@
                 $scope.showAbout = function () {
                     var msgBox = new Windows.UI.Popups.MessageDialog('SreamViewer for Windows 10 by Serg Nigths. Feedback is welcomed: serj.nights@live.com');
                     msgBox.showAsync();
+                }
+
+                function enterFullscreen(element) {
+                    if (element.requestFullscreen) {
+                        element.requestFullscreen();
+                    } else if (element.mozRequestFullScreen) {
+                        element.mozRequestFullScreen();
+                    } else if (element.webkitRequestFullscreen) {
+                        element.webkitRequestFullscreen();
+                    } else if (element.msRequestFullscreen) {
+                        element.msRequestFullscreen();
+                    }
+                }
+
+                function exitFullscreen() {
+                    if (document.exitFullscreen) {
+                        document.exitFullscreen();
+                    } else if (document.mozCancelFullScreen) {
+                        document.mozCancelFullScreen();
+                    } else if (document.webkitExitFullscreen) {
+                        document.webkitExitFullscreen();
+                    }
                 }
             },
             link: function (scope, elem, attrs) {
