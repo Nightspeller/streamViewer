@@ -111,7 +111,10 @@
                 var newPlayer = document.createElement('div');
                 newPlayer.style.height = '100%';
                 newPlayer.style.width = '100%';
-                newPlayer.innerHTML = '<object type="application/x-shockwave-flash" data="//www-cdn.jtvnw.net/swflibs/TwitchPlayer.swf" width="100%" height="100%" id="ember1097-flash-player" style="visibility: visible; min-height: 150px;"><param name="allowScriptAccess" value="always"><param name="allowFullScreen" value="true"><param name="wmode" value="opaque"><param name="bgcolor" value="000000"><param name="flashvars" value="id=ember1097-flash-player&amp;hide_chat=true&amp;channel='+ url + '&amp;embed=0&amp;auto_play=true&amp;eventsCallback=Twitch.player.FlashPlayer2.callbacks.callback0"></object>';
+                //newPlayer.innerHTML = '<object type="application/x-shockwave-flash" data="//www-cdn.jtvnw.net/swflibs/TwitchPlayer.swf" width="100%" height="100%" id="ember1097-flash-player" style="visibility: visible; min-height: 150px;"><param name="allowScriptAccess" value="always"><param name="allowFullScreen" value="true"><param name="wmode" value="opaque"><param name="bgcolor" value="000000"><param name="flashvars" value="id=ember1097-flash-player&amp;hide_chat=true&amp;channel='+ url + '&amp;embed=0&amp;auto_play=true&amp;eventsCallback=Twitch.player.FlashPlayer2.callbacks.callback0"></object>';
+                newPlayer.innerHTML = '<iframe src="http://www.twitch.tv/'+ url +'/embed" frameborder="0" scrolling="no" height="100%" width="100%"></iframe>';
+
+
             }
 
             //var wasPausedByUser = false;

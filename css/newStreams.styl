@@ -8,26 +8,26 @@ html
     margin 0
     padding 0
     .flexContainer
-      display flex
-      flex-direction column
+      display -webkit-flex
+      -webkit-flex-direction column
       height 100%
       .streamOverviewList
         text-align center
-        flex 0 1 auto
+        -webkit-flex 0 1 auto
         border 1px solid blue
       .mainAndChat
         position relative
-        flex 2 0 auto
-        display flex
-        flex-direction row
+        -webkit-flex 2 0 auto
+        display -webkit-flex
+        -webkit-flex-direction row
         border 1px solid red
         .mainScreenSection
           position relative
           border 1px solid green
-          flex-grow 1000
+          -webkit-flex-grow 1000
           color silver
         .chatSection
           position relative
           border 1px solid yellow
-          flex-basis 300px
+          -webkit-flex-basis 300px
           color silver
