@@ -1,0 +1,23 @@
+{
+  "name": "streamviewer",
+  "version": "1.0.0",
+  "description": "StreamViewer for Web",
+  "main": "streamviewer.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nightspeller/streamViewer.git"
+  },
+  "author": "Serg Nights",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Nightspeller/streamViewer/issues"
+  },
+  "homepage": "https://github.com/Nightspeller/streamViewer#readme",
+  "dependencies": {
+    "connect": "^3.5.0",
+    "serve-static": "^1.11.1"
+  }
+}
