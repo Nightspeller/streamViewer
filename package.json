@@ -18,6 +18,7 @@
   "homepage": "https://github.com/Nightspeller/streamViewer#readme",
   "dependencies": {
     "connect": "^3.5.0",
+    "serve-favicon": "^2.3.0",
     "serve-static": "^1.11.1"
   }
 }
