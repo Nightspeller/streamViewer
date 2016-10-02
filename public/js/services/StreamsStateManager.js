@@ -131,6 +131,8 @@
                 var src = document.createAttribute("src");
                 src.value = url;
                 newPlayer.setAttributeNode(src);
+                var allowFullScreen = document.createAttribute("allowfullscreen");
+                newPlayer.setAttributeNode(allowFullScreen);
                 return newPlayer;
             } else {
                 var newPlayer = document.createElement('video');
