@@ -1,0 +1,10 @@
+<div class="sv-chat-controls">
+    <button class="win-button" (click)="selectChat(0)" [class.highlighted]="shownChat === 0">1</button>
+    <button class="win-button" (click)="selectChat(1)" [class.highlighted]="shownChat === 1">2</button>
+    <button class="win-button" (click)="selectChat(2)" [class.highlighted]="shownChat === 2">3</button>
+    <button class="win-button" (click)="selectChat(3)" [class.highlighted]="shownChat === 3">4</button>
+</div>
+<div class="sv-chat-content">
+    <div class="chat-container" *ngFor="let chatElement of chatElements; let i = index" [class.hidden]="shownChat !== i" [innerHTML]="chatElement">
+    </div>
+</div>

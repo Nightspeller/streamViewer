@@ -1,0 +1,19 @@
+<div class="sv-screen">
+    <div class="sv-screen-controls">
+        <button title="Show Controls" (click)="toggleControls()" class="win-button">
+            <span *ngIf="!showControls">&#xe169;</span>
+            <span *ngIf="showControls">&#xe16a;</span>
+        </button>
+        <div *ngIf="showControls">
+            <button title="Show/Hide Stream List" (click)="toggleOverviewList()" class="win-button">&#xe14f;</button>
+            <button title="Show/Hide Chat" (click)="toggleChat()" class="win-button">&#xe126;</button>
+            <button title="Swap main and preview" (click)="swapMainAndPreview()" class="win-button">&#xe13c;</button>
+            <button title="Toggle full screen mode" (click)="toggleFullScreen()" class="win-button" [class.highlighted]="fullScreenMode">
+                <span *ngIf="fullScreenMode">&#xe1d8;</span>
+                <span *ngIf="!fullScreenMode">&#xe1d9;</span>
+            </button>
+            <button title="Show all 4 streams" (click)="showAllStreams()" class="win-button" [class.highlighted]="omniMode"><i class="fa fa-th-large" aria-hidden="true"></i></button>
+            <button title="About StreamViewer" (click)="showAbout()" class="win-button">?</button>
+        </div>
+    </div>
+</div>

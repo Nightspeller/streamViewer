@@ -1,0 +1,23 @@
+<div class="sv-app-layout" (window:resize)="onResize($event)">
+    <div class="sv-preview-row" [class.hidden]="!showOverview">
+        <div class="sv-preview-nowrap">
+            <sv-overview class="sv-preview" [previewContainerId]="0"></sv-overview>
+            <sv-overview class="sv-preview" [previewContainerId]="1"></sv-overview>
+        </div>
+        <div class="sv-preview-nowrap">
+            <sv-overview class="sv-preview" [previewContainerId]="2"></sv-overview>
+            <sv-overview class="sv-preview" [previewContainerId]="3"></sv-overview>
+        </div>
+    </div>
+    <div class="sv-screen-and-chat-row">
+        <sv-screen class="sv-screen"></sv-screen>
+        <sv-chat class="sv-chat" [class.hidden]="!showChat"></sv-chat>
+    </div>
+</div>
+
+<sv-video-container id="sv-video-container-1" [videoContainerId]="0"></sv-video-container>
+<sv-video-container id="sv-video-container-2" [videoContainerId]="1"></sv-video-container>
+<sv-video-container id="sv-video-container-3" [videoContainerId]="2"></sv-video-container>
+<sv-video-container id="sv-video-container-4" [videoContainerId]="3"></sv-video-container>
+
+<sv-picker></sv-picker>

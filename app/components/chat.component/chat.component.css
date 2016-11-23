@@ -1,0 +1,20 @@
+.sv-chat-controls {
+  display: flex;
+  justify-content: space-around;
+}
+.sv-chat-controls button.win-button {
+  flex-grow: 1;
+  min-width: auto;
+}
+.sv-chat-controls button.win-button.highlighted {
+  color: #ff0;
+}
+.sv-chat-content {
+  color: #c0c0c0;
+  flex-grow: 1;
+  display: flex;
+}
+.sv-chat-content .chat-container {
+  display: flex;
+  width: 100%;
+}

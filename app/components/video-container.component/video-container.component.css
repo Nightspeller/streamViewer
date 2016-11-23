@@ -1,0 +1,14 @@
+.sv-video-container {
+  position: absolute;
+  color: #c0c0c0;
+  border: 1px solid #c0c0c0;
+}
+.in-main {
+  z-index: 2;
+}
+.in-preview {
+  z-index: 3;
+}
+.in-quick-preview {
+  z-index: 4;
+}

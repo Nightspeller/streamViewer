@@ -1,0 +1,12 @@
+<div class="sv-controls">
+    <button class="win-button" (click)="addNewStream()">&#xe109;</button>
+    <button class="win-button" (click)="refreshStream()">&#xe149;</button>
+    <button class="win-button" (click)="deleteStream()">&#xe107;</button>
+    <button class="win-button" (click)="moveStreamToPreview()" (mouseenter)="showFastPreview()" (mouseleave)="hideFastPreview()" [class.highlighted]="streamState.position === 'PREVIEW'">&#xe158;</button>
+    <button class="win-button" (click)="moveStreamToMain()" [class.highlighted]="streamState.position === 'MAIN'">&#xe18c;</button>
+</div>
+<div class="sv-stream-description">
+    <div [innerHTML]="streamState.title"></div>
+    <div class="highlighted">{{streamState.subtitle}}</div>
+    <div>{{streamState.description}}</div>
+</div>
