@@ -2,6 +2,8 @@
 
 # compiled output
 /tmp
+err.log
+out.log
 
 # dependencies
 /node_modules
