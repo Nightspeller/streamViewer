@@ -1,0 +1,15 @@
+* {
+  outline: none;
+}
+body {
+  margin: 0;
+  overflow: hidden;
+}
+.hidden {
+  display: none !important;
+}
+
+
+.highlighted {
+  color: yellow;
+}

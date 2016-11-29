@@ -1,0 +1,8 @@
+<div class="sv-video-container"
+     [ngStyle]="{top: top+'px', left: left+'px', width: width+'px', height: height+'px'}" [hidden]="!shown"
+     [class.in-preview]="position === 'PREVIEW'"
+     [class.in-main]="position === 'MAIN'"
+     [class.in-quick-preview]="position === 'QUICK_PREVIEW'"
+     [innerHTML]="videoElement">
+</div>
+{{top}},{{left}},{{width}},{{height}}
