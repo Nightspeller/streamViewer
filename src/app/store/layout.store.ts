@@ -56,12 +56,12 @@ export function layoutReducer(state: ILayout = LAYOUT_INITIAL_STATE, action: IPa
 }
 
 function calculatePreviewSize(screenSize: ContainerPosition) :ContainerPosition {
-    var ratio = 16 / 9;
+    let ratio = 16 / 9;
 
-    var screenWidth = screenSize.width;
-    var screenHeight = screenSize.height;
-    var videoWidth = 0;
-    var videoHeight = 0;
+    let screenWidth = screenSize.width;
+    let screenHeight = screenSize.height;
+    let videoWidth = 0;
+    let videoHeight = 0;
 
     if (screenWidth >= 2 * screenHeight * ratio) {
         videoHeight = screenHeight;
@@ -73,7 +73,7 @@ function calculatePreviewSize(screenSize: ContainerPosition) :ContainerPosition 
         videoHeight = videoWidth / ratio;
     }
 
-    if (screenHeight * ratio > screenWidth) {
+    if (screenHeight * ratio >= screenWidth) {
         videoWidth = screenWidth * (0.5 - 0.3 + 0.4 * (1 / (screenWidth / (screenHeight * ratio))));
         videoHeight = videoWidth / ratio;
     }
