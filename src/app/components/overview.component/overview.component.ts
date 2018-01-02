@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { NgRedux, select } from 'ng2-redux';
+import { NgRedux } from '@angular-redux/store';
 import { Observable } from 'rxjs/Observable';
 
 import { StreamState} from '../../declarations/declarations'

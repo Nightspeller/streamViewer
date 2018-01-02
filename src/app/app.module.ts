@@ -2,7 +2,7 @@ import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule }    from '@angular/http';
 
-import { NgRedux } from 'ng2-redux'
+import { NgReduxModule, NgRedux, DevToolsExtension } from '@angular-redux/store';
 
 import { IAppState, INITIAL_STATE, rootReducer } from './store/store';
 import { StreamsActions, LayoutActions, PickerActions } from './actions/actions';
@@ -17,13 +17,18 @@ import { TwitchService } from './services/twitch.service';
 import { YoutubeService } from './services/youtube.service';
 
 @NgModule({
-  imports:      [ BrowserModule, HttpModule ],
+  imports:      [ BrowserModule, HttpModule, NgReduxModule ],
   declarations: [ AppComponent, OverviewComponent, ScreenComponent, ChatComponent, VideoContainerComponent, PickerComponent ],
   bootstrap:    [ AppComponent ],
-  providers:    [ TwitchService, YoutubeService, NgRedux, StreamsActions, LayoutActions, PickerActions ]
+  providers:    [ TwitchService, YoutubeService, StreamsActions, LayoutActions, PickerActions ]
 })
 export class AppModule {
-  constructor(ngRedux: NgRedux<IAppState>) {
-    ngRedux.configureStore(rootReducer, INITIAL_STATE,[], (<any>window).__REDUX_DEVTOOLS_EXTENSION__ && (<any>window).__REDUX_DEVTOOLS_EXTENSION__() );
+  constructor(ngRedux: NgRedux<IAppState>, devTools: DevToolsExtension) {
+    ngRedux.configureStore(
+      rootReducer,
+      INITIAL_STATE,
+      [],
+      devTools.isEnabled() ? [ devTools.enhancer() ] : []
+    );
   }
 }

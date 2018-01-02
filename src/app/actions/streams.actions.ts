@@ -1,19 +1,19 @@
 import { Injectable } from '@angular/core';
-import { NgRedux } from 'ng2-redux';
+import { NgRedux } from '@angular-redux/store';
 import { IAppState } from '../store/store';
-import { StreamState, PickerGroupItem } from "../declarations/declarations";
+import { StreamState, PickerGroupItem } from '../declarations/declarations';
 
 @Injectable()
 export class StreamsActions {
-    static ADD_NEW_STREAM = "ADD_NEW_STREAM";
-    static DELETE_STREAM = "DELETE_STREAM";
-    static MOVE_TO_MAIN = "MOVE_TO_MAIN";
-    static MOVE_TO_OVERVIEW = "MOVE_TO_OVERVIEW";
-    static MOVE_TO_PREVIEW = "MOVE_TO_PREVIEW";
-    static MOVE_TO_QUICK_PREVIEW = "MOVE_TO_QUICK_PREVIEW";
-    static SWAP_MAIN_AND_PREVIEW = "SWAP_MAIN_AND_PREVIEW";
-    static MOVE_TO_OMNI = "MOVE_TO_OMNI";
-    static EXIT_OMNI = "EXIT_OMNI";
+    static ADD_NEW_STREAM = 'ADD_NEW_STREAM';
+    static DELETE_STREAM = 'DELETE_STREAM';
+    static MOVE_TO_MAIN = 'MOVE_TO_MAIN';
+    static MOVE_TO_OVERVIEW = 'MOVE_TO_OVERVIEW';
+    static MOVE_TO_PREVIEW = 'MOVE_TO_PREVIEW';
+    static MOVE_TO_QUICK_PREVIEW = 'MOVE_TO_QUICK_PREVIEW';
+    static SWAP_MAIN_AND_PREVIEW = 'SWAP_MAIN_AND_PREVIEW';
+    static MOVE_TO_OMNI = 'MOVE_TO_OMNI';
+    static EXIT_OMNI = 'EXIT_OMNI';
 
     constructor(private ngRedux: NgRedux<IAppState>) {}
 

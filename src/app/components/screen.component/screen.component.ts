@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { StreamState} from '../../declarations/declarations'
 
-import { NgRedux, select } from 'ng2-redux';
+import { NgRedux, select } from '@angular-redux/store';
 import { Observable } from 'rxjs/Observable';
 import { StreamsActions, LayoutActions } from '../../actions/actions';
 

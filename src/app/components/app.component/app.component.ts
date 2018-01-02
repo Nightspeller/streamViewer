@@ -1,6 +1,6 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 
-import { NgRedux, select } from 'ng2-redux';
+import { select } from '@angular-redux/store';
 import { Observable } from 'rxjs/Observable';
 
 import { StreamState} from '../../declarations/declarations'
@@ -17,8 +17,8 @@ export class AppComponent implements OnInit {
     @select() streams: Observable<StreamState[]>;
     @select() layout: Observable<any>;
 
-    private showOverview: boolean = true;
-    private showChat: boolean = true;
+    private showOverview = true;
+    private showChat = true;
 
     constructor (
         private layoutActions: LayoutActions,
@@ -32,15 +32,15 @@ export class AppComponent implements OnInit {
         this.layout.subscribe((layout: any) => {
             if (this.showChat !== layout.showChat) {
                 this.showChat = layout.showChat;
-                setTimeout(()=>{
+                setTimeout(() => {
                     this.layoutActions.layoutChanged(this.element.nativeElement);
-                },0);
+                }, 0);
             }
             if (this.showOverview !== layout.showOverview) {
                 this.showOverview = layout.showOverview;
-                setTimeout(()=>{
+                setTimeout(() => {
                     this.layoutActions.layoutChanged(this.element.nativeElement);
-                },0);
+                }, 0);
             }
         });
     }

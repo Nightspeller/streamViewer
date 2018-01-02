@@ -3,7 +3,7 @@ import {DomSanitizer, SafeHtml} from "@angular/platform-browser";
 
 import { StreamState} from '../../declarations/declarations'
 
-import { NgRedux, select } from 'ng2-redux';
+import { NgRedux, select } from '@angular-redux/store';
 import { Observable } from 'rxjs/Observable';
 import {ILayout} from "../../store/layout.store";
 import {IStreams} from "../../store/streams.store";

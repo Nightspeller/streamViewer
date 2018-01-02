@@ -23,9 +23,9 @@ export const LAYOUT_INITIAL_STATE: ILayout = {
 };
 
 export function layoutReducer(state: ILayout = LAYOUT_INITIAL_STATE, action: IPayloadAction): ILayout {
-    switch(action.type) {
+    switch (action.type) {
         case  LayoutActions.UPDATE_LAYOUT:
-            let topContainer :HTMLElement = action.payload;
+            let topContainer: HTMLElement = action.payload;
             let overviewsContainers = topContainer.getElementsByClassName('sv-preview');
             let screenContainer = topContainer.getElementsByClassName('sv-screen')[0];
 

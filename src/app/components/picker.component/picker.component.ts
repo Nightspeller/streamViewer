@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { NgRedux, select } from 'ng2-redux';
+import { NgRedux, select } from '@angular-redux/store';
 import { Observable } from 'rxjs/Observable';
 
 import {PickerDisplayGroup, PickerGroupItem} from '../../declarations/declarations'
