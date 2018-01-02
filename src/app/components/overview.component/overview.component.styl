@@ -1,23 +1,33 @@
-.sv-controls
-  display flex
-  justify-content space-around
-  button.win-button
-    z-index 2
-    flex-basis 25%
-    border none
-    background rgba(0,0,0,0.4)
-    color white
-    padding-top 0.3em
-    cursor pointer
-    min-width auto
-    min-height auto
-  button:hover
-    color yellow
-  button:nth-child(4)
-    padding-top 0.8em
-    transform rotate(180deg)
-  button.highlighted
-    color yellow
-.sv-stream-description
-  margin-top 1.5em
-  text-align center
+.sv-overview-outer-wrapper
+  position relative
+  width 100%
+  padding-bottom 56.25%
+  .sv-overview-inner-wrapper
+    position absolute
+    top 0
+    left 0
+    width 100%
+    height 100%
+    .sv-controls
+      display flex
+      justify-content space-around
+      button.win-button
+        z-index 2
+        flex-basis 25%
+        border none
+        background rgba(0,0,0,0.4)
+        color white
+        padding-top 0.3em
+        cursor pointer
+        min-width auto
+        min-height auto
+      button:hover
+        color yellow
+      button:nth-child(4)
+        padding-top 0.8em
+        transform rotate(180deg)
+      button.highlighted
+        color yellow
+    .sv-stream-description
+      margin-top 1.5em
+      text-align center
