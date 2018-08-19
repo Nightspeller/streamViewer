@@ -184,7 +184,7 @@ export class TwitchService {
                 description: rawData.streams[i].channel.status,
                 code: rawData.streams[i].channel.name,
                 playerHtml: `<iframe src="https://player.twitch.tv/?channel=${rawData.streams[i].channel.name}" width="100%" height="100%" frameborder="0" scrolling="0" allowfullscreen="true"></iframe>`,
-                chatHtml: `<iframe src="https://www.twitch.tv/${rawData.streams[i].channel.name}/chat" width="100%" style="flex-grow: 1" frameborder="0" scrolling="0" allowfullscreen="true"></iframe>`
+                chatHtml: `<iframe src="https://www.twitch.tv/embed/${rawData.streams[i].channel.name}/chat" width="100%" style="flex-grow: 1" frameborder="0" scrolling="0" allowfullscreen="true"></iframe>`
             })
         }
         return pickerDisplayGroup;
